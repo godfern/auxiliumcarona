@@ -2,28 +2,39 @@ import NewsTicker from "./components/NewsTicker";
 import EventCard from "./components/EventCard";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Carousel from "./components/Carousel";
+import MessageSection from "./components/MessageSection";
+import WelcomeSection from "./components/WelcomeSection";
 
 export default function Home() {
   return (
     <div>
       <Navbar />
-      <main className="p-6 space-y-8">
-        <section>
-          <h1 className="text-3xl font-bold">Welcome to Our School</h1>
-          <p className="text-gray-600">Empowering young minds for a brighter future.</p>
+      <main className="space-y-8">
+        {/* Hero Carousel Section */}
+        <section className="px-6 py-8">
+          <Carousel />
         </section>
 
-        <section>
-          <h2 className="text-xl font-semibold">Latest News</h2>
+        {/* Welcome Section */}
+        <WelcomeSection />
+
+        {/* Leadership Messages Section */}
+        <MessageSection />
+
+        {/* News Section */}
+        {/* <section className="px-6">
+          <h2 className="text-xl font-semibold mb-4">Latest News</h2>
           <NewsTicker />
-        </section>
+        </section> */}
 
-        <section>
-          <h2 className="text-xl font-semibold">Upcoming Events</h2>
+        {/* Events Section */}
+        {/* <section className="px-6 pb-8">
+          <h2 className="text-xl font-semibold mb-4">Upcoming Events</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <EventCard />
           </div>
-        </section>
+        </section> */}
       </main>
       <Footer />
     </div>
