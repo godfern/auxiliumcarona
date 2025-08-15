@@ -7,11 +7,13 @@ export default function WelcomeSection() {
                         Welcome to Auxilium Convent, Carona
                     </h1>
                     <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
-                        Empowering young minds for a brighter future through excellence in education,
-                        innovation in learning, and commitment to character development.
+                        We’re delighted to welcome you to Auxilium, Carona — a place where learning is joyful, and every child is valued, nurtured, and inspired to grow.
+                        Rooted in strong values, Auxilium provides a caring environment where students discover their potential, build character, and prepare to be responsible citizens.
+                        Together, let’s nurture dreams, inspire minds, and shape a brighter tomorrow.
+
                     </p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                    {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
                         <div className="text-center">
                             <div className="bg-white bg-opacity-20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,7 +49,7 @@ export default function WelcomeSection() {
                                 Embracing modern teaching methods and technology to prepare students for the future.
                             </p>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* <div className="mt-12">
                         <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-200 mr-4">

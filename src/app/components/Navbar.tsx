@@ -2,21 +2,60 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
     const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
     const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const controlNavbar = () => {
+            if (typeof window !== 'undefined') {
+                const currentScrollY = window.scrollY;
+                
+                // Show navbar when at top of page
+                if (currentScrollY < 10) {
+                    setIsVisible(true);
+                }
+                // Hide when scrolling down, show when scrolling up
+                else if (currentScrollY > lastScrollY) {
+                    // Scrolling down
+                    setIsVisible(false);
+                    // Close any open dropdowns when hiding
+                    setIsAboutDropdownOpen(false);
+                    setIsContactDropdownOpen(false);
+                } else {
+                    // Scrolling up
+                    setIsVisible(true);
+                }
+
+                setLastScrollY(currentScrollY);
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            window.addEventListener('scroll', controlNavbar);
+
+            // Cleanup function
+            return () => {
+                window.removeEventListener('scroll', controlNavbar);
+            };
+        }
+    }, [lastScrollY]);
 
     return (
-        <nav className="bg-blue-800 text-white p-4">
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <nav className={`bg-blue-800 text-white p-4 fixed top-0 left-0 right-0 z-50 shadow-md transition-transform duration-300 ease-in-out ${
+            isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'
+        }`}>
+            <div className="mx-auto flex items-center justify-between">
                 {/* Logo */}
                 <div className="flex items-center">
                     <Link href="/" className="flex items-center space-x-3">
                         <div className="relative w-12 h-12">
                             <Image
-                                src="/images/school-logo.png"
+                                src="/images/school_logo.png"
                                 alt="Auxilium Convent, Carona"
                                 width={48}
                                 height={48}
@@ -65,12 +104,6 @@ export default function Navbar() {
                                 <Link href="/about/leadership" className="block px-4 py-2 hover:bg-blue-50 transition-colors">
                                     Leadership
                                 </Link>
-                                {/* <Link href="/about/manager-message" className="block px-4 py-2 hover:bg-blue-50 transition-colors">
-                                    Manager's Message
-                                </Link>
-                                <Link href="/about/provincial-message" className="block px-4 py-2 hover:bg-blue-50 transition-colors">
-                                    Provincial's Message
-                                </Link> */}
                                 <Link href="/about/team" className="block px-4 py-2 hover:bg-blue-50 transition-colors">
                                     Our Team (Staff & Management)
                                 </Link>

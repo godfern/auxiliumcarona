@@ -19,7 +19,7 @@ interface FacebookGalleryProps {
 }
 
 export default function FacebookGallery({
-    pageId = "your-facebook-page-id",
+    pageId = "124839092248041",
     accessToken = "your-access-token",
     maxPosts = 6
 }: FacebookGalleryProps) {

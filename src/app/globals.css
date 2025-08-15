@@ -18,4 +18,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  padding-top: 80px; /* Add padding to account for fixed navbar */
+}
+
+/* Smooth scrolling for better user experience */
+html {
+  scroll-behavior: smooth;
 }

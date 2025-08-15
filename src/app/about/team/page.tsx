@@ -8,7 +8,7 @@ export default function TeamPage() {
       name: "Sr. Lavita Sequira",
       role: "Principal",
       department: "School Administration",
-      photo: "/images/principal.jpg",
+      photo: "/images/sr_lavita.jpg",
       email: "principal@auxiliumcarona.edu.in",
       phone: "+91 98765 43210",
       description: "Leading our school with over 15 years of experience in educational leadership and administration.",

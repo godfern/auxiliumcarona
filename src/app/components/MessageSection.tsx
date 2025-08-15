@@ -42,7 +42,7 @@ export default function MessageSection() {
             name: "Sr. Lavita Sequira",
             title: "Principal",
             message: "Welcome to our school community! As Principal, I am committed to fostering an environment where every student can thrive academically, socially, and emotionally. Our dedicated staff works tirelessly to provide innovative learning experiences that prepare students for the challenges of tomorrow. Together, we build a foundation for lifelong success.",
-            photo: "/images/principal.png"
+            photo: "/images/sr_lavita.png"
         },
         {
             name: "Sr. Antonette Desouza",

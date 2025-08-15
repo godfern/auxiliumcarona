@@ -8,22 +8,29 @@ export default function LeadershipPage() {
             name: "Sr. Lavita Sequira",
             title: "Principal",
             message: "Welcome to our school community! As Principal, I am committed to fostering an environment where every student can thrive academically, socially, and emotionally. Our dedicated staff works tirelessly to provide innovative learning experiences that prepare students for the challenges of tomorrow. Together, we build a foundation for lifelong success.",
-            photo: "/images/principal.jpg",
+            photo: "/images/sr_lavita.jpg",
             quote: "Education is a matter of the heart, of which God alone is the master."
         },
         {
             name: "Sr. Antonette Desouza",
             title: "School Manager",
             message: "Our school management team is dedicated to creating an optimal learning environment where excellence is the standard. We focus on maintaining high academic standards while ensuring our facilities and resources support the best possible educational experience for all our students and staff.",
-            photo: "/images/manager.jpg",
+            photo: "/images/sr_antonette.png",
             quote: "Excellence in education is not just about academic achievement, but about building character and fostering a love for learning."
         },
         {
-            name: "Sr. Provincial",
-            title: "Provincial Education Director",
-            message: "It gives me great pleasure to support this outstanding educational institution. The commitment to academic excellence and character development demonstrated here serves as a model for schools across our province. We are proud to partner with such a forward-thinking educational community.",
-            photo: "/images/provincial.jpg",
+            name: "Sr Meenakshi D’Silva",
+            title: "Our Provincial",
+            message: "Sr. Meenakshi D’Silva is the leader of the Salesian Sisters in our Mumbai Province, which includes Goa, Gujarat, Karnataka, and Maharashtra. She is the 8th Provincial and has spent many years helping children and young people through education. She has taken care of many important jobs, like looking after the Province’s needs, leading communities, working with youth, and guiding other Sisters. Sister Meenakshi loves nature and teaching, and she encourages everyone to care for the Earth and to learn with joy",
+            photo: "/images/sr_provincial.png",
             quote: "We will open a needle work class for the young girls of the village and we will teach them to sew, but our principle aim will be to teach them to know God, to make them good, and save them from many dangers."
+        },
+        {
+            name: "Mother Chiara Cazzuola",
+            title: "Our Mother General",
+            message: "Mother Chiara Cazzuola is the leader of the Salesian Sisters all over the world. She is the 10th person to take the place of St. Mary Mazzarello in guiding our big Salesian family.She loves young people very much and works hard to help them grow happy, kind, and strong in faith.Mother Chiara is cheerful, friendly, and always ready to work together with others",
+            photo: "/images/mother_general.jpg",
+            quote: "I trust the Lord and I entrust myself to Mary Help of Christians. For this, I say YES!"
         }
     ];
 
@@ -47,14 +54,14 @@ export default function LeadershipPage() {
                 {/* Leadership Messages Section */}
                 <section className="py-16">
                     <div className="max-w-6xl mx-auto px-6">
-                        <div className="text-center mb-12">
+                        {/* <div className="text-center mb-12">
                             <h2 className="text-3xl font-bold text-gray-800 mb-4">
                                 Leadership Messages
                             </h2>
                             <p className="text-gray-600 max-w-2xl mx-auto">
                                 Hear from our school leadership about their vision for education and commitment to student success.
                             </p>
-                        </div>
+                        </div> */}
 
                         <div className="space-y-16">
                             {leadership.map((leader, index) => (
@@ -98,7 +105,7 @@ export default function LeadershipPage() {
                 </section>
 
                 {/* Leadership Philosophy Section */}
-                <section className="py-16 bg-white">
+                {/* <section className="py-16 bg-white">
                     <div className="max-w-6xl mx-auto px-6">
                         <div className="text-center mb-12">
                             <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Leadership Philosophy</h2>
@@ -145,10 +152,10 @@ export default function LeadershipPage() {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> */}
 
                 {/* Call to Action */}
-                <section className="py-16 bg-blue-600 text-white">
+                {/* <section className="py-16 bg-blue-600 text-white">
                     <div className="max-w-4xl mx-auto px-6 text-center">
                         <h2 className="text-3xl font-bold mb-6">Join Our School Community</h2>
                         <p className="text-xl mb-8">
@@ -163,7 +170,7 @@ export default function LeadershipPage() {
                             </button>
                         </div>
                     </div>
-                </section>
+                </section> */}
             </main>
 
             <Footer />
