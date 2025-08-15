@@ -1,8 +1,18 @@
 import Link from 'next/link';
 import EventNewsCard from './EventNewsCard';
 
+interface EventNewsItem {
+    id: number;
+    type: 'event' | 'news';
+    title: string;
+    date: string;
+    description: string;
+    thumbnail: string;
+    slug: string;
+}
+
 // Mock data - in a real app this would come from an API or CMS
-const mockEvents = [
+const mockEvents: EventNewsItem[] = [
     {
         id: 1,
         type: 'event',
