@@ -7,7 +7,7 @@ export default function TeamPage() {
     {
       name: "Sr. Lavita Sequira",
       role: "Principal",
-      department: "School Administration",
+      department: "School Principal",
       photo: "/images/sr_lavita.jpg",
       email: "principal@auxiliumcarona.edu.in",
       phone: "+91 98765 43210",
@@ -18,7 +18,7 @@ export default function TeamPage() {
       name: "Sr. Antonette Desouza",
       role: "School Manager",
       department: "School Administration",
-      photo: "/images/manager.jpg",
+      photo: "/images/sr_antonette.png",
       email: "manager@auxiliumcarona.edu.in",
       phone: "+91 98765 43211",
       description: "Overseeing school operations and ensuring smooth administrative functioning.",
@@ -28,7 +28,7 @@ export default function TeamPage() {
       name: "Sr. Provincial",
       role: "Provincial Education Director",
       department: "Provincial Administration",
-      photo: "/images/provincial.jpg",
+      photo: "/images/sr_provincial.png",
       email: "provincial@auxiliumcarona.edu.in",
       phone: "+91 98765 43212",
       description: "Providing strategic direction and oversight for educational excellence across the province.",
@@ -145,7 +145,7 @@ export default function TeamPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <main className="py-12">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
@@ -168,7 +168,7 @@ export default function TeamPage() {
                 Our leadership team provides strategic direction and ensures the highest standards of education.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {managementTeam.map((member, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
@@ -186,12 +186,12 @@ export default function TeamPage() {
                       <p className="text-blue-200">{member.role}</p>
                     </div>
                   </div>
-                  
+
                   <div className="p-6">
                     <p className="text-sm text-blue-600 font-semibold mb-2">{member.department}</p>
                     <p className="text-gray-600 mb-4">{member.description}</p>
                     <p className="text-sm text-gray-500 mb-4"><strong>Qualifications:</strong> {member.qualifications}</p>
-                    
+
                     <div className="space-y-2 text-sm">
                       <div className="flex items-center text-gray-600">
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -222,8 +222,31 @@ export default function TeamPage() {
                 Our experienced educators are dedicated to nurturing academic excellence and character development.
               </p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            {/* Single Image of All Teaching Staff */}
+            <div className="mb-12">
+              <div className="max-w-4xl mx-auto">
+                <div className="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                  <div className="relative h-96 md:h-[500px] overflow-hidden">
+                    <Image
+                      src="/images/teaching-staff-group.jpg"
+                      alt="Auxilium School Teaching Staff Group Photo"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Our Dedicated Teaching Team</h3>
+                    <p className="text-gray-600 text-sm">
+                      Together, we inspire, educate, and shape the future of our students with passion and commitment.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {teachingStaff.map((teacher, index) => (
                 <div key={index} className="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                   <div className="relative h-48 overflow-hidden">
@@ -260,12 +283,12 @@ export default function TeamPage() {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </section>
 
         {/* Support Staff Section */}
-        <section className="py-16">
+        {/* <section className="py-16">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-800 mb-4">Support Staff</h2>
@@ -307,10 +330,10 @@ export default function TeamPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Team Values Section */}
-        <section className="py-16 bg-blue-600 text-white">
+        {/* <section className="py-16 bg-blue-600 text-white">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold mb-6">Our Team Values</h2>
             <p className="text-xl mb-8">
@@ -352,10 +375,10 @@ export default function TeamPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Contact Section */}
-        <section className="py-16 bg-white">
+        {/* <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Get in Touch</h2>
             <p className="text-lg text-gray-600 mb-8">
@@ -376,9 +399,9 @@ export default function TeamPage() {
               </a>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
-      
+
       <Footer />
     </div>
   );

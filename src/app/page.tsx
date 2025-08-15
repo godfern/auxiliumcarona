@@ -1,10 +1,10 @@
 import NewsTicker from "./components/NewsTicker";
-import EventCard from "./components/EventCard";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Carousel from "./components/Carousel";
 import WelcomeSection from "./components/WelcomeSection";
-import FacebookGallery from "./components/FacebookGallery";
+// import FacebookGallery from "./components/FacebookGallery";
+import EventsNewsSection from "./components/EventsNewsSection";
 
 export default function Home() {
   return (
@@ -19,22 +19,19 @@ export default function Home() {
         {/* Welcome Section */}
         <WelcomeSection />
 
-        {/* News Section */}
+        {/* Upcoming News and Events Section */}
         <section className="px-6">
-          <h2 className="text-xl font-semibold mb-4">Latest News</h2>
+          <h2 className="text-xl font-semibold mb-4">Upcoming News and Events</h2>
           <NewsTicker />
         </section>
 
-        {/* Facebook Gallery Section */}
-        <FacebookGallery />
+        {/* Latest Events & News Section */}
+        <EventsNewsSection />
 
-        {/* Events Section */}
-        <section className="px-6 pb-8">
-          <h2 className="text-xl font-semibold mb-4">Upcoming Events</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <EventCard />
-          </div>
-        </section>
+        {/* Facebook Gallery Section */}
+        {/* <FacebookGallery /> */}
+
+
       </main>
       <Footer />
     </div>
