@@ -5,8 +5,18 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import EventNewsCard from '../components/EventNewsCard';
 
+interface EventNewsItem {
+    id: number;
+    type: 'event' | 'news';
+    title: string;
+    date: string;
+    description: string;
+    thumbnail: string;
+    slug: string;
+}
+
 // Extended mock data with more items
-const mockData = [
+const mockData: EventNewsItem[] = [
     {
         id: 1,
         type: 'event',
