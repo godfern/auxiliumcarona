@@ -23,7 +23,7 @@ export default function LeadershipPage() {
             title: "Our Provincial",
             message: "Sr. Meenakshi D’Silva is the leader of the Salesian Sisters in our Mumbai Province, which includes Goa, Gujarat, Karnataka, and Maharashtra. She is the 8th Provincial and has spent many years helping children and young people through education. She has taken care of many important jobs, like looking after the Province’s needs, leading communities, working with youth, and guiding other Sisters. Sister Meenakshi loves nature and teaching, and she encourages everyone to care for the Earth and to learn with joy",
             photo: "/images/sr_provincial.png",
-            quote: "We will open a needle work class for the young girls of the village and we will teach them to sew, but our principle aim will be to teach them to know God, to make them good, and save them from many dangers."
+            quote: "Life is a beautiful journey where each day is an opportunity to meet God in new ways. We find Him in the smile of a child, in acts off kindness, in moments of silence, and in the challenges we face. Like Mary, let us keep our hearts open to His presence and say “yes” to His will daily. When we discover God each day, our life becomes a path of joy, hope, and love. Life is discovering God each day."
         },
         {
             name: "Mother Chiara Cazzuola",

@@ -5,53 +5,59 @@ import Image from "next/image";
 export default function HistoryPage() {
     const timelineEvents = [
         {
-            year: "1960",
-            title: "Foundation of the School",
-            description: "Auxilium Convent, Carona was established by the Salesian Sisters of Don Bosco, marking the beginning of a new era in education in the region.",
+            year: "June 9, 1976",
+            title: "Auxilium Villa Especiosa Opens: Kindergarten and Oratory Established",
+            description: "The Auxilium Convent (also known as Auxilium Villa Especiosa) was officially opened. On the very same day, the Sisters inaugurated a kindergarten school (nursery & KG) and an oratory as the initial foundation of their educational mission.",
             image: "/images/history-1960.jpg"
         },
         {
-            year: "1965",
-            title: "First Graduation Ceremony",
-            description: "The school celebrated its first batch of graduates, establishing a tradition of academic excellence and character formation.",
+            year: "June 24, 1976",
+            title: "First Mass in the Oratory",
+            description: "The first Mass in the selected chapel took place on June 24, 1976.",
             image: "/images/history-1965.jpg"
         },
         {
-            year: "1975",
-            title: "Expansion of Facilities",
-            description: "New classrooms and laboratories were added to accommodate the growing student population and enhance the learning environment.",
+            year: "1976",
+            title: "Auxilium Primary School, Carona, is Recorded as a Private Aided Rural School",
+            description: "According to external educational listings, Auxilium Primary School, Carona, is recorded as being established in 1976 and is recognized as a private aided rural school in the Bardez block of North Goa.",
+            image: "/images/primary-school.png"
+        },
+        {
+            year: "1978",
+            title: "Primary School Begins: First Class I with 58 Students",
+            description: "The primary school (Class I) began its operations with an initial enrollment of 58 students in Standard I.",
             image: "/images/history-1975.jpg"
         },
-        {
-            year: "1985",
-            title: "Introduction of Higher Secondary",
-            description: "The school expanded its curriculum to include higher secondary education, providing complete educational pathway for students.",
-            image: "/images/history-1985.jpg"
-        },
-        {
-            year: "1995",
-            title: "Golden Jubilee Celebrations",
-            description: "The school celebrated 35 years of educational service with grand celebrations, honoring the legacy of Don Bosco's educational mission.",
-            image: "/images/history-1995.jpg"
-        },
-        {
-            year: "2005",
-            title: "Modernization and Technology",
-            description: "Computer labs and modern teaching aids were introduced, integrating technology into the educational curriculum.",
-            image: "/images/history-2005.jpg"
-        },
-        {
-            year: "2015",
-            title: "Diamond Jubilee",
-            description: "55 years of excellence in education were celebrated, reaffirming the school's commitment to holistic development.",
-            image: "/images/history-2015.jpg"
-        },
-        {
-            year: "2023",
-            title: "Present Day",
-            description: "Continuing the legacy of excellence, the school remains committed to providing quality education based on the Salesian values of reason, religion, and loving-kindness.",
-            image: "/images/history-2023.jpg"
-        }
+        // {
+        //     year: "1985",
+        //     title: "Introduction of Higher Secondary",
+        //     description: "The school expanded its curriculum to include higher secondary education, providing complete educational pathway for students.",
+        //     image: "/images/history-1985.jpg"
+        // },
+        // {
+        //     year: "1995",
+        //     title: "Golden Jubilee Celebrations",
+        //     description: "The school celebrated 35 years of educational service with grand celebrations, honoring the legacy of Don Bosco's educational mission.",
+        //     image: "/images/history-1995.jpg"
+        // },
+        // {
+        //     year: "2005",
+        //     title: "Modernization and Technology",
+        //     description: "Computer labs and modern teaching aids were introduced, integrating technology into the educational curriculum.",
+        //     image: "/images/history-2005.jpg"
+        // },
+        // {
+        //     year: "2015",
+        //     title: "Diamond Jubilee",
+        //     description: "55 years of excellence in education were celebrated, reaffirming the school's commitment to holistic development.",
+        //     image: "/images/history-2015.jpg"
+        // },
+        // {
+        //     year: "2023",
+        //     title: "Present Day",
+        //     description: "Continuing the legacy of excellence, the school remains committed to providing quality education based on the Salesian values of reason, religion, and loving-kindness.",
+        //     image: "/images/history-2023.jpg"
+        // }
     ];
 
     return (
@@ -117,8 +123,8 @@ export default function HistoryPage() {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-2xl font-bold text-gray-800">Established in 1960</h3>
-                                    <p className="text-blue-600 font-semibold">Over 60 Years of Excellence</p>
+                                    <h3 className="text-2xl font-bold text-gray-800">Established in 1976</h3>
+                                    <p className="text-blue-600 font-semibold">Over 50 Years of Excellence</p>
                                 </div>
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center">
@@ -127,16 +133,16 @@ export default function HistoryPage() {
                                     </div>
                                     <div className="flex justify-between items-center">
                                         <span className="text-gray-600">Years of Service</span>
-                                        <span className="font-bold text-gray-800">60+</span>
+                                        <span className="font-bold text-gray-800">50</span>
                                     </div>
                                     <div className="flex justify-between items-center">
                                         <span className="text-gray-600">Generations Served</span>
                                         <span className="font-bold text-gray-800">3+</span>
                                     </div>
-                                    <div className="flex justify-between items-center">
+                                    {/* <div className="flex justify-between items-center">
                                         <span className="text-gray-600">Awards & Recognition</span>
                                         <span className="font-bold text-gray-800">50+</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -170,7 +176,7 @@ export default function HistoryPage() {
                                             </div>
                                         </div>
                                         {/* Image */}
-                                        <div className={`w-5/12 ${index % 2 === 0 ? 'pl-8' : 'pr-8'}`}>
+                                        {/* <div className={`w-5/12 ${index % 2 === 0 ? 'pl-8' : 'pr-8'}`}>
                                             <div className="bg-gray-200 rounded-lg overflow-hidden h-48">
                                                 <Image
                                                     src={event.image}
@@ -180,7 +186,7 @@ export default function HistoryPage() {
                                                     className="w-full h-full object-cover"
                                                 />
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 ))}
                             </div>
