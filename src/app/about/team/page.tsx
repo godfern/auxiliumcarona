@@ -229,10 +229,10 @@ export default function TeamPage() {
                 <div className="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
                   <div className="relative h-96 md:h-[500px] overflow-hidden">
                     <Image
-                      src="/images/teaching-staff-group.jpg"
+                      src="/images/teaching-staff-group.jpeg"
                       alt="Auxilium School Teaching Staff Group Photo"
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       priority
                     />
                   </div>

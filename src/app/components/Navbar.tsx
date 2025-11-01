@@ -70,7 +70,7 @@ export default function Navbar() {
     return (
         <nav className={`bg-blue-800 text-white p-4 fixed top-0 left-0 right-0 z-50 shadow-md transition-transform duration-300 ease-in-out ${isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'
             }`}>
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="max-w-8xl mx-auto flex items-center justify-between">
                 {/* Logo */}
                 <div className="flex items-center">
                     <Link href="/" className="flex items-center space-x-3" onClick={closeMobileMenu}>
