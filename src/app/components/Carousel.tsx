@@ -14,25 +14,25 @@ const carouselItems: CarouselItem[] = [
         id: 1,
         title: "Welcome to Our School",
         description: "Empowering young minds for a brighter future through quality education and innovative learning.",
-        image: "/images/school1.jpg"
+        image: "/images/slider/slider1.webp"
     },
     {
         id: 2,
         title: "Excellence in Education",
         description: "Our dedicated teachers and staff work together to provide the best learning experience for every student.",
-        image: "/images/school2.jpg"
+        image: "/images/slider/slider2.jpeg"
     },
     {
         id: 3,
-        title: "State-of-the-Art Facilities",
-        description: "Modern classrooms, science labs, and sports facilities to support comprehensive development.",
-        image: "/images/school3.jpg"
+        title: "Little Hands, Big Creations!",
+        description: "Guided by caring teachers, our young learners turn simple ideas into colourful masterpieces, discovering the joy of creativity together.",
+        image: "/images/slider/slider3.jpeg"
     },
     {
         id: 4,
-        title: "Community and Growth",
-        description: "Building strong relationships and fostering personal growth in a supportive environment.",
-        image: "/images/school4.jpg"
+        title: "Learning Beyond Classrooms - Every Child is a Star!",
+        description: "Where children explore, create, and shine through every activity.",
+        image: "/images/slider/slider4.jpeg"
     }
 ];
 
@@ -104,7 +104,7 @@ export default function Carousel() {
             {/* Navigation Arrows */}
             <button
                 onClick={goToPrevious}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
                 aria-label="Previous slide"
             >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,7 +114,7 @@ export default function Carousel() {
 
             <button
                 onClick={goToNext}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
                 aria-label="Next slide"
             >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
