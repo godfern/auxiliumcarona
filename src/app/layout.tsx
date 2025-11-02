@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     icon: '/favicon.ico', // Browser fallback
     apple: '/images/favicon/apple-touch-icon.png',
   },
-  manifest: '/images/favicon/site.webmanifest',
+  manifest: '/manifest.json',
   themeColor: '#1e40af',
 };
 
