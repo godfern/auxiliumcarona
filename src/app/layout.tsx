@@ -4,17 +4,15 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Auxilium Carona - School Website",
   description: "Empowering young minds for a brighter future",
+  // icon.ico in app directory is automatically detected by Next.js and served at /icon.ico
+  // public/favicon.ico serves as browser fallback at /favicon.ico
+  // Only specify additional icons here
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
+    icon: '/favicon.ico', // Browser fallback
     apple: '/images/favicon/apple-touch-icon.png',
   },
   manifest: '/images/favicon/site.webmanifest',
   themeColor: '#1e40af',
-  other: {
-    'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-status-bar-style': 'black-translucent',
-  },
 };
 
 export default function RootLayout({
