@@ -42,3 +42,10 @@ next-env.d.ts
 
 # Snyk Security Extension - AI Rules (auto-generated)
 .cursor/rules/snyk_rules.mdc
+school-cms/node_modules/
+school-cms/build/
+school-cms/dist/
+school-cms/cache/
+school-cms/tmp/
+school-cms/logs/
+school-cms/logs/
