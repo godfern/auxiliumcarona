@@ -1,15 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
-interface EventNewsItem {
-    id: number;
-    type: 'event' | 'news';
-    title: string;
-    date: string;
-    description: string;
-    thumbnail: string;
-    slug: string;
-}
+import type { EventNewsItem } from '@/lib/strapi';
 
 interface EventNewsCardProps {
     item: EventNewsItem;
@@ -54,9 +45,11 @@ export default function EventNewsCard({ item }: EventNewsCardProps) {
                     <p className="text-sm text-gray-500 mb-3">
                         {formatDate(item.date)}
                     </p>
-                    <p className="text-gray-700 text-sm leading-relaxed">
-                        {item.description}
-                    </p>
+                    {(item.subTitle ?? item.description) && (
+                        <p className="text-gray-700 text-sm leading-relaxed">
+                            {item.subTitle ?? item.description}
+                        </p>
+                    )}
 
                     {/* CTA Button */}
                     <div className="mt-4">

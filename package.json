@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "dev:prod": "NEXT_PUBLIC_STRAPI_URL=https://loving-comfort-5b814b6e84.strapiapp.com STRAPI_INSECURE_TLS=1 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

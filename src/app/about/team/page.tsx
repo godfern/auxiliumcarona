@@ -190,9 +190,9 @@ export default function TeamPage() {
                   <div className="p-6">
                     <p className="text-sm text-blue-600 font-semibold mb-2">{member.department}</p>
                     <p className="text-gray-600 mb-4">{member.description}</p>
-                    <p className="text-sm text-gray-500 mb-4"><strong>Qualifications:</strong> {member.qualifications}</p>
+                    {/* <p className="text-sm text-gray-500 mb-4"><strong>Qualifications:</strong> {member.qualifications}</p> */}
 
-                    <div className="space-y-2 text-sm">
+                    {/* <div className="space-y-2 text-sm">
                       <div className="flex items-center text-gray-600">
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -205,7 +205,7 @@ export default function TeamPage() {
                         </svg>
                         <a href={`tel:${member.phone}`} className="hover:text-blue-600">{member.phone}</a>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
