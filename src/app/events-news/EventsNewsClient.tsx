@@ -18,7 +18,7 @@ export default function EventsNewsClient({ events }: EventsNewsClientProps) {
     const matchesFilter = filter === 'all' || item.type === filter;
     const matchesSearch =
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase());
+      (item.description ?? '').toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
