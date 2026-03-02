@@ -5,14 +5,20 @@ import Carousel from "./components/Carousel";
 import WelcomeSection from "./components/WelcomeSection";
 // import FacebookGallery from "./components/FacebookGallery";
 import EventsNewsSection from "./components/EventsNewsSection";
-import { fetchEvents } from "@/lib/strapi";
+import { fetchEvents, fetchCarousels } from "@/lib/strapi";
 
 export default async function Home() {
   let events: Awaited<ReturnType<typeof fetchEvents>> = [];
+  let carouselItems: Awaited<ReturnType<typeof fetchCarousels>> = [];
   try {
     events = await fetchEvents();
   } catch (e) {
     console.error("Failed to load events from Strapi:", e);
+  }
+  try {
+    carouselItems = await fetchCarousels();
+  } catch (e) {
+    console.error("Failed to load carousel from Strapi:", e);
   }
 
   return (
@@ -21,7 +27,7 @@ export default async function Home() {
       <main className="space-y-8">
         {/* Hero Carousel Section */}
         <section className="px-6 py-8">
-          <Carousel />
+          <Carousel items={carouselItems} />
         </section>
 
         {/* Welcome Section */}

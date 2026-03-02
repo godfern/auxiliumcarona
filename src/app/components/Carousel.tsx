@@ -1,56 +1,33 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import type { CarouselItem } from '@/lib/strapi';
 
-interface CarouselItem {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-}
-
-const carouselItems: CarouselItem[] = [
-    {
-        id: 1,
-        title: "Welcome to Our School",
-        description: "Empowering young minds for a brighter future through quality education and innovative learning.",
-        image: "/images/slider/slider1.webp"
-    },
-    {
-        id: 2,
-        title: "Excellence in Education",
-        description: "Our dedicated teachers and staff work together to provide the best learning experience for every student.",
-        image: "/images/slider/slider2.jpeg"
-    },
-    {
-        id: 3,
-        title: "Little Hands, Big Creations!",
-        description: "Guided by caring teachers, our young learners turn simple ideas into colourful masterpieces, discovering the joy of creativity together.",
-        image: "/images/slider/slider3.jpeg"
-    },
-    {
-        id: 4,
-        title: "Learning Beyond Classrooms - Every Child is a Star!",
-        description: "Where children explore, create, and shine through every activity.",
-        image: "/images/slider/slider4.jpeg"
-    }
+const FALLBACK_ITEMS: CarouselItem[] = [
+    { id: 1, title: "Welcome to Our School", description: "Empowering young minds for a brighter future through quality education and innovative learning.", image: "/images/slider/slider1.webp" },
+    { id: 2, title: "Excellence in Education", description: "Our dedicated teachers and staff work together to provide the best learning experience for every student.", image: "/images/slider/slider2.jpeg" },
+    { id: 3, title: "Little Hands, Big Creations!", description: "Guided by caring teachers, our young learners turn simple ideas into colourful masterpieces, discovering the joy of creativity together.", image: "/images/slider/slider3.jpeg" },
+    { id: 4, title: "Learning Beyond Classrooms - Every Child is a Star!", description: "Where children explore, create, and shine through every activity.", image: "/images/slider/slider4.jpeg" },
 ];
 
-export default function Carousel() {
+interface CarouselProps {
+    items?: CarouselItem[] | null;
+}
+
+export default function Carousel({ items }: CarouselProps) {
+    const carouselItems = (items && items.length > 0) ? items : FALLBACK_ITEMS;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
     useEffect(() => {
         if (!isAutoPlaying) return;
-
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) =>
                 prevIndex === carouselItems.length - 1 ? 0 : prevIndex + 1
             );
         }, 5000);
-
         return () => clearInterval(interval);
-    }, [isAutoPlaying]);
+    }, [isAutoPlaying, carouselItems.length]);
 
     const goToSlide = (index: number) => {
         setCurrentIndex(index);

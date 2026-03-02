@@ -115,6 +115,35 @@ interface StrapiEventsResponse {
   meta?: { pagination?: { page: number; pageCount: number; total: number } };
 }
 
+/** App-facing carousel slide type */
+export interface CarouselItem {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+}
+
+/** Strapi carousel entry (v4 attributes or v5 flat) */
+interface StrapiCarouselEntry {
+  id: number;
+  documentId?: string;
+  attributes?: {
+    title?: string;
+    description?: string;
+    image?: StrapiMedia | { url?: string };
+    isActive?: boolean;
+  };
+  title?: string;
+  description?: string;
+  image?: StrapiMedia | { url?: string };
+  isActive?: boolean;
+}
+
+interface StrapiCarouselResponse {
+  data: StrapiCarouselEntry[];
+  meta?: { pagination?: { page: number; pageCount: number; total: number } };
+}
+
 function imageUrl(path: string | undefined): string {
   if (!path) return '/images/school1.jpg';
   if (path.startsWith('http')) return path;
@@ -243,4 +272,34 @@ export async function fetchEventBySlug(slug: string): Promise<EventNewsDetailIte
 /** Base URL for Strapi media (for next/image src) */
 export function getStrapiMediaUrl(path: string | undefined): string {
   return path ? imageUrl(path) : '/images/school1.jpg';
+}
+
+/** Fetch carousel slides from Strapi (only isActive === true). Uses /api/home-page-carousels. */
+export async function fetchCarousels(): Promise<CarouselItem[]> {
+  const url = `${STRAPI_URL}/api/home-page-carousels?populate=*`;
+  const res = await strapiFetch(url);
+  if (!res.ok) {
+    throw new Error(`Strapi carousels failed: ${res.status} ${res.statusText}`);
+  }
+  const json: StrapiCarouselResponse = await res.json();
+  if (!Array.isArray(json.data)) return [];
+  const isActive = (e: StrapiCarouselEntry): boolean => {
+    if (e == null) return false;
+    const v = e.attributes ?? e;
+    const a = (v as Record<string, unknown>).isActive ?? (v as Record<string, unknown>).is_active;
+    return a === true;
+  };
+  return json.data
+    .filter((e) => isActive(e))
+    .map((entry): CarouselItem => {
+      const attrs = entry.attributes ?? entry;
+      const media = attrs.image ?? (entry as StrapiCarouselEntry).image;
+      const imgUrl = getMediaUrl(media as StrapiEventEntry['thumbnail']);
+      return {
+        id: entry.id,
+        title: (attrs.title ?? (entry as StrapiCarouselEntry).title) ?? '',
+        description: (attrs.description ?? (entry as StrapiCarouselEntry).description) ?? '',
+        image: imgUrl,
+      };
+    });
 }
