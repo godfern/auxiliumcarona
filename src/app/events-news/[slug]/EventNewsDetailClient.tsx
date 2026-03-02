@@ -60,6 +60,7 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
                   fill
                   className="object-cover cursor-pointer"
                   onClick={() => setShowGallery(true)}
+                  unoptimized
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
                   <div className="bg-white bg-opacity-90 rounded-full p-3 opacity-0 hover:opacity-100 transition-opacity duration-300">

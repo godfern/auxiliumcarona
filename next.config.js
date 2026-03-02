@@ -19,8 +19,6 @@ const nextConfig = {
     return config;
   },
   images: {
-    loader: 'custom',
-    loaderFile: './lib/imageLoader.js',
     remotePatterns: [
       { protocol: 'http', hostname: 'localhost', port: '1337', pathname: '/uploads/**' },
       { protocol: 'https', hostname: 'loving-comfort-5b814b6e84.strapiapp.com', pathname: '/uploads/**' },
