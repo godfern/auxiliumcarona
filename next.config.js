@@ -19,17 +19,16 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: [
-      'example.com',
-      'images.unsplash.com',
-      'yavuzceliker.github.io',
-      'loving-comfort-5b814b6e84.strapiapp.com',
-      'loving-comfort-5b814b6e84.media.strapiapp.com',
-    ],
+    loader: 'custom',
+    loaderFile: './lib/imageLoader.js',
     remotePatterns: [
       { protocol: 'http', hostname: 'localhost', port: '1337', pathname: '/uploads/**' },
       { protocol: 'https', hostname: 'loving-comfort-5b814b6e84.strapiapp.com', pathname: '/uploads/**' },
       { protocol: 'https', hostname: 'loving-comfort-5b814b6e84.media.strapiapp.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'dl.dropboxusercontent.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'example.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'yavuzceliker.github.io', pathname: '/**' },
     ],
   },
 };

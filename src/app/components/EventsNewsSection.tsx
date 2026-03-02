@@ -1,15 +1,12 @@
 import Link from 'next/link';
 import EventNewsCard from './EventNewsCard';
-import { fetchEvents, type EventNewsItem } from '@/lib/strapi';
+import type { EventNewsItem } from '@/lib/strapi';
 
-export default async function EventsNewsSection() {
-  let events: EventNewsItem[] = [];
-  try {
-    events = await fetchEvents();
-  } catch (e) {
-    console.error('Failed to load events from Strapi:', e);
-  }
+interface EventsNewsSectionProps {
+  events: EventNewsItem[];
+}
 
+export default function EventsNewsSection({ events }: EventsNewsSectionProps) {
   return (
     <section className="px-6 py-8 bg-gray-50">
       <div className="max-w-7xl mx-auto">

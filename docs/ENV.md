@@ -31,8 +31,16 @@ If you deploy to **Vercel**, **Netlify**, or similar, set environment variables 
 | **Other** | Set `NEXT_PUBLIC_STRAPI_URL` in the production environment so it’s available at build time. |
 
 - Use **Production** (or equivalent) scope so it only applies to production builds.
-- Do **not** set `STRAPI_INSECURE_TLS` in production.
+### Fetch fails in production (e.g. "self-signed certificate" or "fetch failed")?
 
-### Why no `STRAPI_INSECURE_TLS` in production?
+1. **Check the URL is set**  
+   In your host (Vercel, Netlify, etc.), ensure **Production** has:
+   - `NEXT_PUBLIC_STRAPI_URL` = `https://loving-comfort-5b814b6e84.strapiapp.com`
 
-`STRAPI_INSECURE_TLS=1` turns off TLS certificate verification. Use it only locally if you hit a self-signed certificate error. In production, leave it unset so connections stay verified and secure.
+2. **Same TLS error as locally**  
+   If the host’s Node runtime rejects the Strapi certificate (e.g. `self-signed certificate in certificate chain`), add in **Production**:
+   - `STRAPI_INSECURE_TLS` = `1`  
+   This skips TLS verification for Strapi only. Use only if needed; it weakens security for that request.
+
+3. **Other**  
+   Check the deploy logs for the exact error (timeout, 403, etc.).

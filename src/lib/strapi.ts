@@ -1,6 +1,6 @@
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
 
-/** When set (e.g. "1" or "true"), skip TLS verification for Strapi requests (dev only; fixes self-signed cert errors). */
+/** When set ("1" or "true"), skip TLS verification for Strapi requests. Use if you get "self-signed certificate" (e.g. Strapi Cloud from some runtimes). */
 const INSECURE_TLS = process.env.STRAPI_INSECURE_TLS === '1' || process.env.STRAPI_INSECURE_TLS === 'true';
 
 async function strapiFetch(url: string): Promise<Response> {

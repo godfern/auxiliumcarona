@@ -3,6 +3,8 @@ import Footer from '../../components/Footer';
 import { fetchEventBySlug } from '@/lib/strapi';
 import EventNewsDetailClient from './EventNewsDetailClient';
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }

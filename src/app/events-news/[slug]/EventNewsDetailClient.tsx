@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import RichText from '@/components/RichText';
 import type { EventNewsDetailItem } from '@/lib/strapi';
 
 interface EventNewsDetailClientProps {
@@ -71,8 +72,14 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
             </div>
 
             {item.description && (
-              <div className="prose prose-lg max-w-none mb-8">
-                <div className="whitespace-pre-line text-gray-700 leading-relaxed">{item.description}</div>
+              <div className="mb-8">
+                <RichText content={item.description} />
+              </div>
+            )}
+
+            {item.longDescription && (
+              <div className="mb-8">
+                <RichText content={item.longDescription} />
               </div>
             )}
 

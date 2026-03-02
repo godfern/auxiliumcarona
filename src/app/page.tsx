@@ -5,8 +5,16 @@ import Carousel from "./components/Carousel";
 import WelcomeSection from "./components/WelcomeSection";
 // import FacebookGallery from "./components/FacebookGallery";
 import EventsNewsSection from "./components/EventsNewsSection";
+import { fetchEvents } from "@/lib/strapi";
 
-export default function Home() {
+export default async function Home() {
+  let events: Awaited<ReturnType<typeof fetchEvents>> = [];
+  try {
+    events = await fetchEvents();
+  } catch (e) {
+    console.error("Failed to load events from Strapi:", e);
+  }
+
   return (
     <div>
       <Navbar />
@@ -26,7 +34,7 @@ export default function Home() {
         </section>
 
         {/* Latest Events & News Section */}
-        <EventsNewsSection />
+        <EventsNewsSection events={events} />
 
         {/* Facebook Gallery Section */}
         {/* <FacebookGallery /> */}
