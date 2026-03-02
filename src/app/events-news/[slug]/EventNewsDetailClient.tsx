@@ -28,7 +28,7 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
     return type === 'event' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800';
   };
 
-  const gallery = item.gallery && item.gallery.length > 0 ? item.gallery : [item.mainImage || item.thumbnail];
+  const gallery = item.gallery && item.gallery.length > 0 ? item.gallery : [item.eventMainImage || item.thumbnail];
 
   return (
     <div>
@@ -53,9 +53,9 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
         <section className="py-8">
           <div className="max-w-4xl mx-auto px-6">
             <div className="mb-8">
-              <div className="relative h-96 rounded-lg overflow-hidden">
+              <div className="relative h-[600px] rounded-lg overflow-hidden">
                 <Image
-                  src={item.mainImage || item.thumbnail}
+                  src={item.eventMainImage || item.thumbnail}
                   alt={item.title}
                   fill
                   className="object-cover cursor-pointer"

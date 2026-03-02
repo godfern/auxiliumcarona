@@ -44,7 +44,7 @@ export interface EventNewsItem {
 export interface EventNewsDetailItem extends EventNewsItem {
   subTitle?: string;
   longDescription?: string;
-  mainImage?: string;
+  eventMainImage?: string;
   gallery?: string[];
 }
 
@@ -79,6 +79,7 @@ interface StrapiEventAttributes {
   longDescription?: string;
   thumbnail?: StrapiMedia;
   mainImage?: StrapiMedia;
+  eventMainImage?: StrapiMedia | { url?: string };
   images?: { imagesUrl1?: string; imagesUrl2?: string };
   gallery?: StrapiMediaList | Array<{ url?: string; formats?: { thumbnail?: { url: string } } }>;
   type?: 'event' | 'news';
@@ -101,6 +102,7 @@ interface StrapiEventEntry {
   longDescription?: string;
   thumbnail?: StrapiMedia | { url?: string };
   mainImage?: StrapiMedia | { url?: string };
+  eventMainImage?: StrapiMedia | { url?: string };
   images?: { imagesUrl1?: string; imagesUrl2?: string };
   gallery?: StrapiMediaList | Array<{ url?: string; attributes?: { url?: string }; formats?: { thumbnail?: { url: string } } }>;
   type?: 'event' | 'news';
@@ -189,18 +191,20 @@ function mapStrapiEventToItem(entry: StrapiEventEntry): EventNewsItem {
 function mapStrapiEventToDetail(entry: StrapiEventEntry): EventNewsDetailItem {
   const item = mapStrapiEventToItem(entry);
   const a = getAttrs(entry);
-  // Prefer images.imagesUrl1 (first image) for main/hero image, then Strapi mainImage media, then thumbnail
   const firstImage = getEntryImageUrl(entry, a);
-  const mainImage =
-    firstImage !== '/images/school1.jpg'
-      ? firstImage
-      : getMediaUrl(a.mainImage ?? (entry as StrapiEventEntry).mainImage) || item.thumbnail;
+  const eventMainImageUrl = getMediaUrl(a.eventMainImage ?? entry.eventMainImage);
+  const eventMainImage =
+    eventMainImageUrl !== '/images/school1.jpg'
+      ? eventMainImageUrl
+      : firstImage !== '/images/school1.jpg'
+        ? firstImage
+        : item.thumbnail;
   return {
     ...item,
     subTitle: a.subTitle ?? undefined,
     longDescription: a.longDescription ?? undefined,
-    mainImage,
-    gallery: getGalleryUrls(a.gallery ?? (entry as StrapiEventEntry).gallery),
+    eventMainImage,
+    gallery: getGalleryUrls(a.gallery ?? entry.gallery),
   };
 }
 

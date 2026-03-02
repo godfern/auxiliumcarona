@@ -30,6 +30,7 @@ export default function EventNewsCard({ item }: EventNewsCardProps) {
                         alt={item.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        unoptimized
                     />
                     {/* Type badge */}
                     <div className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(item.type)}`}>
