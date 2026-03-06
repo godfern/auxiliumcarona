@@ -1,10 +1,10 @@
-import NewsTicker from "./components/NewsTicker";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Carousel from "./components/Carousel";
 import WelcomeSection from "./components/WelcomeSection";
 // import FacebookGallery from "./components/FacebookGallery";
 import EventsNewsSection from "./components/EventsNewsSection";
+import UpcomingEventsNewsSection from "./components/UpcomingEventsNewsSection";
 import { fetchEvents, fetchCarousels } from "@/lib/strapi";
 
 export default async function Home() {
@@ -33,14 +33,11 @@ export default async function Home() {
         {/* Welcome Section */}
         <WelcomeSection />
 
-        {/* Upcoming News and Events Section */}
-        <section className="px-6">
-          <h2 className="text-xl font-semibold mb-4">Upcoming News and Events</h2>
-          <NewsTicker />
-        </section>
-
         {/* Latest Events & News Section */}
         <EventsNewsSection events={events} />
+
+        {/* Upcoming News and Events Section */}
+        <UpcomingEventsNewsSection events={events.filter((e) => e.isUpcoming)} />
 
         {/* Facebook Gallery Section */}
         {/* <FacebookGallery /> */}

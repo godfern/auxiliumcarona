@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-JERHLL9TP8";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://auxiliumcarona.org';
 
@@ -27,6 +31,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+            window.gtag = gtag;
+          `}
+        </Script>
+        <GoogleAnalytics />
         {children}
       </body>
     </html>

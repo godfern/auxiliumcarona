@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { trackEventView } from '@/lib/analytics';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import RichText from '@/components/RichText';
@@ -14,6 +15,15 @@ interface EventNewsDetailClientProps {
 export default function EventNewsDetailClient({ item }: EventNewsDetailClientProps) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [showGallery, setShowGallery] = useState(false);
+
+  useEffect(() => {
+    trackEventView({
+      eventTitle: item.title,
+      eventSlug: item.slug,
+      eventType: item.type,
+      eventId: item.id,
+    });
+  }, [item.id, item.slug, item.title, item.type]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -84,9 +94,9 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
               </div>
             )}
 
-            {item.gallery && item.gallery.length > 0 && (
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="font-semibold text-xl mb-6">Photo Gallery</h3>
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="font-semibold text-xl mb-6">Photo Gallery</h3>
+              {item.gallery && item.gallery.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {item.gallery.map((image, index) => (
                     <div
@@ -113,8 +123,13 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
                     </div>
                   ))}
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="py-12 text-center border-2 border-dashed border-gray-200 rounded-lg">
+                  <p className="text-gray-600 font-medium">Coming Soon</p>
+                  <p className="text-gray-500 text-sm mt-1">Photos will be added soon</p>
+                </div>
+              )}
+            </div>
           </div>
         </section>
       </main>

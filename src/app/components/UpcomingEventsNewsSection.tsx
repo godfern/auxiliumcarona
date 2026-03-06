@@ -2,25 +2,25 @@ import Link from 'next/link';
 import EventNewsCard from './EventNewsCard';
 import type { EventNewsItem } from '@/lib/strapi';
 
-interface EventsNewsSectionProps {
+interface UpcomingEventsNewsSectionProps {
   events: EventNewsItem[];
 }
 
-function sortByDateDesc(items: EventNewsItem[]): EventNewsItem[] {
+function sortByDateAsc(items: EventNewsItem[]): EventNewsItem[] {
   return [...items].sort((a, b) => {
     const dateA = new Date(a.date).getTime();
     const dateB = new Date(b.date).getTime();
-    return dateB - dateA;
+    return dateA - dateB;
   });
 }
 
-export default function EventsNewsSection({ events }: EventsNewsSectionProps) {
-  const latestEvents = sortByDateDesc(events.filter((e) => !e.isUpcoming));
+export default function UpcomingEventsNewsSection({ events }: UpcomingEventsNewsSectionProps) {
+  const upcomingEvents = sortByDateAsc(events);
   return (
-    <section className="px-6 py-8 bg-gray-50">
+    <section className="px-6 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-900">Latest Events & News</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Upcoming News and Events</h2>
           <Link
             href="/events-news"
             className="text-blue-600 hover:text-blue-800 font-semibold transition-colors"
@@ -29,16 +29,15 @@ export default function EventsNewsSection({ events }: EventsNewsSectionProps) {
           </Link>
         </div>
 
-        {latestEvents.length > 0 ? (
+        {upcomingEvents.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {latestEvents.map((item) => (
+            {upcomingEvents.map((item) => (
               <EventNewsCard key={item.id} item={item} />
             ))}
           </div>
         ) : (
           <p className="text-gray-600">
-            No events at the moment. Make sure Strapi is running at{' '}
-            {process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}.
+            No upcoming events at the moment.
           </p>
         )}
       </div>

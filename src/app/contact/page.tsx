@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ContactForm from "./ContactForm";
 
 export default function Contact() {
     return (
@@ -10,7 +11,7 @@ export default function Contact() {
                 <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
                     <div className="max-w-7xl mx-auto px-6 text-center">
                         <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-                        <p className="text-xl opacity-90">Get in touch with Auxilium School, Carona</p>
+                        <p className="text-xl opacity-90">Get in touch with Auxilium Convent School, Carona</p>
                     </div>
                 </section>
 
@@ -44,9 +45,9 @@ export default function Contact() {
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-900 mb-1">Address</h3>
                                             <p className="text-gray-600">
-                                                Auxilium School<br />
+                                                Auxilium Convent School<br />
                                                 Carona, Goa, India<br />
-                                                PIN: 403001
+                                                PIN: 403523
                                             </p>
                                         </div>
                                     </div>
@@ -62,8 +63,8 @@ export default function Contact() {
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-900 mb-1">Phone</h3>
                                             <p className="text-gray-600">
-                                                <a href="tel:+91832XXXXXXX" className="hover:text-blue-600 transition-colors">
-                                                    +91 832-XXX-XXXX
+                                                <a href="tel:+918879066324" className="hover:text-blue-600 transition-colors">
+                                                    +91 8879066324
                                                 </a><br />
                                                 <span className="text-sm text-gray-500">Main Office</span>
                                             </p>
@@ -82,7 +83,7 @@ export default function Contact() {
                                             <h3 className="text-lg font-semibold text-gray-900 mb-1">Email</h3>
                                             <p className="text-gray-600">
                                                 <a href="mailto:info@auxiliumcarona.edu.in" className="hover:text-blue-600 transition-colors">
-                                                    info@auxiliumcarona.edu.in
+                                                    auxiliumcarona@gmail.com
                                                 </a><br />
                                                 <span className="text-sm text-gray-500">General Inquiries</span>
                                             </p>
@@ -100,7 +101,7 @@ export default function Contact() {
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-900 mb-1">Office Hours</h3>
                                             <p className="text-gray-600">
-                                                Monday - Friday: 8:00 AM - 4:00 PM<br />
+                                                Monday - Friday: 8:00 AM - 1:30 PM<br />
                                                 Saturday: 8:00 AM - 12:00 PM<br />
                                                 Sunday: Closed
                                             </p>
@@ -152,103 +153,7 @@ export default function Contact() {
                             {/* Contact Form */}
                             <div className="bg-white rounded-lg shadow-lg p-8">
                                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-                                <form className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                                                First Name *
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="firstName"
-                                                name="firstName"
-                                                required
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                                                placeholder="Enter your first name"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                                                Last Name *
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="lastName"
-                                                name="lastName"
-                                                required
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                                                placeholder="Enter your last name"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                                            Email Address *
-                                        </label>
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            name="email"
-                                            required
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                                            placeholder="Enter your email address"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                                            Phone Number
-                                        </label>
-                                        <input
-                                            type="tel"
-                                            id="phone"
-                                            name="phone"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                                            placeholder="Enter your phone number"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                                            Subject *
-                                        </label>
-                                        <select
-                                            id="subject"
-                                            name="subject"
-                                            required
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                                        >
-                                            <option value="">Select a subject</option>
-                                            <option value="admissions">Admissions Inquiry</option>
-                                            <option value="academics">Academic Information</option>
-                                            <option value="general">General Information</option>
-                                            <option value="feedback">Feedback</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                                            Message *
-                                        </label>
-                                        <textarea
-                                            id="message"
-                                            name="message"
-                                            required
-                                            rows={5}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
-                                            placeholder="Please describe your inquiry or message..."
-                                        ></textarea>
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                    >
-                                        Send Message
-                                    </button>
-                                </form>
+                                <ContactForm />
                             </div>
                         </div>
                     </div>
@@ -259,29 +164,43 @@ export default function Contact() {
                     <div className="max-w-7xl mx-auto px-6">
                         <div className="text-center mb-8">
                             <h2 className="text-3xl font-bold text-gray-900 mb-4">Find Us</h2>
-                            <p className="text-gray-600">Visit our school campus in Carona, Goa</p>
+                            <p className="text-gray-600">Visit our school campus in Carona Village, Aldona, Goa</p>
                         </div>
 
-                        {/* Map Placeholder */}
-                        <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-                            <div className="text-center">
-                                <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <p className="text-gray-500 text-lg">Interactive Map Coming Soon</p>
-                                <p className="text-gray-400 text-sm">We're working on integrating a map to help you find us easily</p>
-                            </div>
+                        {/* Google Map Embed */}
+                        <div className="rounded-lg overflow-hidden shadow-lg h-96">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4513.816322381344!2d73.8699796!3d15.578319599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf9514a2e756dd%3A0x59feeb0dbe1edfc5!2sAuxilium%20Convent%20School!5e1!3m2!1sen!2sin!4v1772817214525!5m2!1sen!2sin"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                title="Auxilium Convent School - Carona Village, Aldona, Goa"
+                                className="w-full h-full min-h-[384px]"
+                            />
                         </div>
 
                         {/* Map Instructions */}
                         <div className="mt-6 text-center">
                             <p className="text-gray-600">
-                                <strong>Directions:</strong> Located in the heart of Carona, Goa.
+                                <strong>Address:</strong> HVHC+938, Carona Village, Aldona, Goa 403523
+                            </p>
+                            <p className="text-gray-600 mt-2">
+                                <strong>Directions:</strong> Located in the heart of Carona Village, Aldona.
                                 Easily accessible by road with ample parking available.
                             </p>
+                            <a
+                                href="https://maps.app.goo.gl/uGuvGueGkeXqYM9Q8"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block mt-4 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+                            >
+                                Open in Google Maps →
+                            </a>
                         </div>
-                </div>
+                    </div>
                 </section>
             </main>
             <Footer />

@@ -13,7 +13,7 @@ export default function Footer() {
                         <div className="flex items-center mb-4">
                             <Image
                                 src="/images/school_logo.png"
-                                alt="Auxilium School Logo"
+                                alt="Auxilium Convent School Logo"
                                 width={50}
                                 height={50}
                                 className="mr-3"
@@ -29,8 +29,8 @@ export default function Footer() {
                         </p>
                         <div className="text-sm">
                             <p className="mb-1">📍 Carona, Goa, India</p>
-                            <p className="mb-1">📞 +91 832-XXX-XXXX</p>
-                            <p className="mb-1">✉️ info@auxiliumcarona.edu.in</p>
+                            <p className="mb-1">📞 +91 8879066324</p>
+                            <p className="mb-1">✉️ auxiliumcarona@gmail.com</p>
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@ export default function Footer() {
                     </div>
 
                     {/* Important Links */}
-                    <div>
+                    {/* <div>
                         <h4 className="text-white font-semibold text-lg mb-4">Important Links</h4>
                         <ul className="space-y-2">
                             <li>
@@ -96,7 +96,7 @@ export default function Footer() {
                                 </Link>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     {/* Social Media & Contact */}
                     <div>

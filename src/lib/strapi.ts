@@ -38,6 +38,7 @@ export interface EventNewsItem {
   thumbnail: string;
   slug: string;
   subTitle?: string;
+  isUpcoming?: boolean;
 }
 
 /** Extended for detail page */
@@ -85,6 +86,8 @@ interface StrapiEventAttributes {
   type?: 'event' | 'news';
   createdAt?: string;
   publishedAt?: string;
+  isUpcoming?: boolean;
+  is_upcoming?: boolean;
 }
 
 interface StrapiEventEntry {
@@ -108,6 +111,8 @@ interface StrapiEventEntry {
   type?: 'event' | 'news';
   createdAt?: string;
   publishedAt?: string;
+  isUpcoming?: boolean;
+  is_upcoming?: boolean;
 }
 
 interface StrapiEventsResponse {
@@ -205,6 +210,7 @@ function mapStrapiEventToItem(entry: StrapiEventEntry): EventNewsItem {
   const title = (a as Record<string, unknown>).Title ?? a.title ?? '';
   const slug =
     (a.slug != null && a.slug !== '') ? String(a.slug) : (entry.documentId ?? String(entry.id));
+  const isUpcoming = (a as Record<string, unknown>).isUpcoming ?? (a as Record<string, unknown>).is_upcoming ?? false;
   return {
     id: entry.id,
     type: (a.type as 'event' | 'news') || 'event',
@@ -214,6 +220,7 @@ function mapStrapiEventToItem(entry: StrapiEventEntry): EventNewsItem {
     thumbnail: getEntryImageUrl(entry, a),
     slug,
     subTitle: a.subTitle ?? undefined,
+    isUpcoming: Boolean(isUpcoming),
   };
 }
 

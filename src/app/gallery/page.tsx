@@ -7,16 +7,9 @@ export default function Gallery() {
             <Navbar />
             <main className="p-6">
                 <h1 className="text-3xl font-bold mb-6">Photo Gallery</h1>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                        <p className="text-gray-500">Photo 1</p>
-                    </div>
-                    <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                        <p className="text-gray-500">Photo 2</p>
-                    </div>
-                    <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                        <p className="text-gray-500">Photo 3</p>
-                    </div>
+                <div className="bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 py-16 flex flex-col items-center justify-center">
+                    <p className="text-xl font-medium text-gray-600 mb-2">Coming Soon</p>
+                    <p className="text-gray-500">We're working on bringing you our photo gallery. Check back later!</p>
                 </div>
             </main>
             <Footer />
