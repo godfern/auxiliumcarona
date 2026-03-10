@@ -252,8 +252,9 @@ export async function fetchEvents(): Promise<EventNewsItem[]> {
     throw new Error(`Strapi events failed: ${res.status} ${res.statusText}`);
   }
   const json: StrapiEventsResponse = await res.json();
-  if (!Array.isArray(json.data)) return [];
-  return json.data.filter((e): e is StrapiEventEntry => e != null && typeof e.id !== 'undefined').map(mapStrapiEventToItem);
+  const data = json.data;
+  const entries = Array.isArray(data) ? data : [];
+  return entries.filter((e): e is StrapiEventEntry => e != null && typeof e.id !== 'undefined').map(mapStrapiEventToItem);
 }
 
 /** Fetch a single event by slug or documentId (when slug is null in API) */

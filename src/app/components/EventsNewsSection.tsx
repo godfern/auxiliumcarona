@@ -15,7 +15,8 @@ function sortByDateDesc(items: EventNewsItem[]): EventNewsItem[] {
 }
 
 export default function EventsNewsSection({ events }: EventsNewsSectionProps) {
-  const latestEvents = sortByDateDesc(events.filter((e) => !e.isUpcoming));
+  const nonUpcoming = events.filter((e) => !e.isUpcoming);
+  const latestEvents = sortByDateDesc(nonUpcoming.length > 0 ? nonUpcoming : events);
   return (
     <section className="px-6 py-8 bg-gray-50">
       <div className="max-w-7xl mx-auto">
@@ -37,8 +38,13 @@ export default function EventsNewsSection({ events }: EventsNewsSectionProps) {
           </div>
         ) : (
           <p className="text-gray-600">
-            No events at the moment. Make sure Strapi is running at{' '}
-            {process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}.
+            No events at the moment. Check that Strapi has published events and is reachable at{' '}
+            <span className="font-mono text-sm">{process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}</span>.
+            {process.env.NEXT_PUBLIC_STRAPI_URL?.includes('strapiapp.com') && (
+              <span className="block mt-2 text-sm">
+                Tip: On Vercel, add <code className="bg-gray-200 px-1 rounded">STRAPI_INSECURE_TLS=1</code> if you get connection errors.
+              </span>
+            )}
           </p>
         )}
       </div>
