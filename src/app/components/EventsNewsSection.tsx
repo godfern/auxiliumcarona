@@ -14,9 +14,11 @@ function sortByDateDesc(items: EventNewsItem[]): EventNewsItem[] {
   });
 }
 
+const MAX_LATEST_EVENTS = 6;
+
 export default function EventsNewsSection({ events }: EventsNewsSectionProps) {
   const nonUpcoming = events.filter((e) => !e.isUpcoming);
-  const latestEvents = sortByDateDesc(nonUpcoming.length > 0 ? nonUpcoming : events);
+  const latestEvents = sortByDateDesc(nonUpcoming.length > 0 ? nonUpcoming : events).slice(0, MAX_LATEST_EVENTS);
   return (
     <section className="px-6 py-8 bg-gray-50">
       <div className="max-w-7xl mx-auto">
