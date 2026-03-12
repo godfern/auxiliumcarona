@@ -67,12 +67,12 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
           <div className="max-w-4xl mx-auto px-6">
             {hasHeroImage && (
               <div className="mb-8">
-                <div className="relative h-[600px] rounded-lg overflow-hidden">
+                <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden bg-gray-100">
                   <Image
                     src={heroImage}
                     alt={item.title}
                     fill
-                    className="object-cover cursor-pointer"
+                    className="object-contain cursor-pointer"
                     onClick={() => gallery.length > 0 && setShowGallery(true)}
                     unoptimized
                   />

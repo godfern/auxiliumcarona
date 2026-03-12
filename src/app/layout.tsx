@@ -17,6 +17,28 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   manifest: '/manifest.json',
+  openGraph: {
+    title: "Auxilium Carona - School Website",
+    description: "Empowering young minds for a brighter future",
+    url: siteUrl,
+    siteName: "Auxilium Carona",
+    type: "website",
+    locale: "en_IN",
+    images: [
+      {
+        url: "/images/school_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Auxilium Convent School Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Auxilium Carona - School Website",
+    description: "Empowering young minds for a brighter future",
+    images: ["/images/school_logo.png"],
+  },
 };
 
 export const viewport: Viewport = {
