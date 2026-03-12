@@ -84,6 +84,7 @@ interface StrapiEventAttributes {
   images?: { imagesUrl1?: string; imagesUrl2?: string };
   gallery?: StrapiMediaList | Array<{ url?: string; formats?: { thumbnail?: { url: string } } }>;
   type?: 'event' | 'news';
+  eventType?: 'event' | 'news' | 'Event' | 'News';
   createdAt?: string;
   publishedAt?: string;
   isUpcoming?: boolean;
@@ -109,6 +110,7 @@ interface StrapiEventEntry {
   images?: { imagesUrl1?: string; imagesUrl2?: string };
   gallery?: StrapiMediaList | Array<{ url?: string; attributes?: { url?: string }; formats?: { thumbnail?: { url: string } } }>;
   type?: 'event' | 'news';
+  eventType?: 'event' | 'news' | 'Event' | 'News';
   createdAt?: string;
   publishedAt?: string;
   isUpcoming?: boolean;
@@ -211,9 +213,21 @@ function mapStrapiEventToItem(entry: StrapiEventEntry): EventNewsItem {
   const slug =
     (a.slug != null && a.slug !== '') ? String(a.slug) : (entry.documentId ?? String(entry.id));
   const isUpcoming = (a as Record<string, unknown>).isUpcoming ?? (a as Record<string, unknown>).is_upcoming ?? false;
+  const typeValue =
+    (a as Record<string, unknown>).eventType ??
+    a.type ??
+    (entry as StrapiEventEntry).type ??
+    (entry as unknown as Record<string, unknown>).eventType ??
+    (a as Record<string, unknown>).event_type;
+  const raw = (() => {
+    if (typeof typeValue === 'string') return typeValue.toLowerCase();
+    if (typeValue && typeof typeValue === 'object' && 'value' in typeValue) return String((typeValue as { value?: string }).value ?? '').toLowerCase();
+    return '';
+  })();
+  const type: 'event' | 'news' = raw === 'news' ? 'news' : 'event';
   return {
     id: entry.id,
-    type: (a.type as 'event' | 'news') || 'event',
+    type,
     title: String(title),
     date: String(date),
     description: a.description ?? '',
@@ -244,17 +258,38 @@ function mapStrapiEventToDetail(entry: StrapiEventEntry): EventNewsDetailItem {
   };
 }
 
-/** Fetch all events from Strapi (populate=* for images) */
+/** Fetch all event entries from Strapi with pagination (raw StrapiEventEntry[]). */
+async function fetchAllEventEntries(): Promise<StrapiEventEntry[]> {
+  const allEntries: StrapiEventEntry[] = [];
+  let page = 1;
+  let pageCount = 1;
+
+  do {
+    const url = `${STRAPI_URL}/api/events?populate=*&pagination[page]=${page}&pagination[pageSize]=25`;
+    const res = await strapiFetch(url);
+    if (!res.ok) {
+      throw new Error(`Strapi events failed: ${res.status} ${res.statusText}`);
+    }
+    const json: StrapiEventsResponse = await res.json();
+    const data = Array.isArray(json.data) ? json.data : [];
+    allEntries.push(...data);
+    pageCount = json.meta?.pagination?.pageCount ?? 1;
+    page++;
+  } while (page <= pageCount);
+
+  return allEntries.filter((e): e is StrapiEventEntry => e != null && typeof e.id !== 'undefined');
+}
+
+/** Fetch all events from Strapi (populate=* for images). Uses pagination to fetch all pages. Sorted by eventDate descending (latest first). */
 export async function fetchEvents(): Promise<EventNewsItem[]> {
-  const url = `${STRAPI_URL}/api/events?populate=*`;
-  const res = await strapiFetch(url);
-  if (!res.ok) {
-    throw new Error(`Strapi events failed: ${res.status} ${res.statusText}`);
-  }
-  const json: StrapiEventsResponse = await res.json();
-  const data = json.data;
-  const entries = Array.isArray(data) ? data : [];
-  return entries.filter((e): e is StrapiEventEntry => e != null && typeof e.id !== 'undefined').map(mapStrapiEventToItem);
+  const entries = await fetchAllEventEntries();
+  const items = entries.map(mapStrapiEventToItem);
+  return items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+/** Normalize slug for comparison (lowercase, trim) */
+function normalizeSlug(s: string): string {
+  return String(s ?? '').toLowerCase().trim();
 }
 
 /** Fetch a single event by slug or documentId (when slug is null in API) */
@@ -265,7 +300,8 @@ export async function fetchEventBySlug(slug: string): Promise<EventNewsDetailIte
   if (!res.ok) throw new Error(`Strapi event failed: ${res.status} ${res.statusText}`);
   let json: StrapiEventsResponse = await res.json();
   let entry = json.data?.[0];
-  if (!entry && /^[a-z0-9]+$/i.test(slug) && slug.length >= 20) {
+
+  if (!entry && /^[a-z0-9-]+$/i.test(slug) && slug.length >= 20) {
     url = `${STRAPI_URL}/api/events?filters[documentId][$eq]=${encoded}&populate=*`;
     res = await strapiFetch(url);
     if (res.ok) {
@@ -273,6 +309,18 @@ export async function fetchEventBySlug(slug: string): Promise<EventNewsDetailIte
       entry = json.data?.[0];
     }
   }
+
+  if (!entry) {
+    const allEntries = await fetchAllEventEntries();
+    const normalized = normalizeSlug(slug);
+    const found = allEntries.find((e) => {
+      const a = e.attributes ?? e;
+      const s = (a as { slug?: string }).slug ?? (e as StrapiEventEntry).documentId ?? String(e.id);
+      return normalizeSlug(s) === normalized;
+    });
+    if (found) entry = found;
+  }
+
   if (!entry) return null;
   return mapStrapiEventToDetail(entry);
 }

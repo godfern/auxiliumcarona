@@ -1,26 +1,51 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import EventNewsCard from '../components/EventNewsCard';
 import type { EventNewsItem } from '@/lib/strapi';
 
+const EVENTS_PER_PAGE = 9;
+
 interface EventsNewsClientProps {
   events: EventNewsItem[];
+  initialPage?: number;
 }
 
-export default function EventsNewsClient({ events }: EventsNewsClientProps) {
+export default function EventsNewsClient({ events, initialPage = 1 }: EventsNewsClientProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [filter, setFilter] = useState<'all' | 'event' | 'news'>('all');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredData = events.filter((item) => {
-    const matchesFilter = filter === 'all' || item.type === filter;
-    const matchesSearch =
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (item.description ?? '').toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesFilter && matchesSearch;
-  });
+  const filteredData = useMemo(
+    () =>
+      events.filter((item) => {
+        const matchesFilter = filter === 'all' || item.type === filter;
+        const matchesSearch =
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (item.description ?? '').toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesFilter && matchesSearch;
+      }),
+    [events, filter, searchTerm]
+  );
+
+  const totalPages = Math.max(1, Math.ceil(filteredData.length / EVENTS_PER_PAGE));
+  const currentPage = Math.min(Math.max(1, initialPage), totalPages);
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * EVENTS_PER_PAGE,
+    currentPage * EVENTS_PER_PAGE
+  );
+
+  const goToPage = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (page <= 1) params.delete('page');
+    else params.set('page', String(page));
+    const query = params.toString();
+    router.push(query ? `/events-news?${query}` : '/events-news');
+  };
 
   return (
     <div>
@@ -88,15 +113,54 @@ export default function EventsNewsClient({ events }: EventsNewsClientProps) {
             </div>
 
             <p className="text-gray-600 mb-6">
-              Showing {filteredData.length} of {events.length} items
+              {filteredData.length > 0
+                ? `Showing ${(currentPage - 1) * EVENTS_PER_PAGE + 1}–${Math.min(currentPage * EVENTS_PER_PAGE, filteredData.length)} of ${filteredData.length} items`
+                : `Showing 0 of ${filteredData.length} items`}
+              {filteredData.length !== events.length && events.length > 0 && ` (filtered from ${events.length})`}
             </p>
 
-            {filteredData.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredData.map((item) => (
-                  <EventNewsCard key={item.id} item={item} />
-                ))}
-              </div>
+            {paginatedData.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {paginatedData.map((item) => (
+                    <EventNewsCard key={item.id} item={item} />
+                  ))}
+                </div>
+
+                {totalPages > 1 && (
+                  <nav className="mt-10 flex flex-wrap items-center justify-center gap-2" aria-label="Pagination">
+                    <button
+                      onClick={() => goToPage(currentPage - 1)}
+                      disabled={currentPage <= 1}
+                      className="px-4 py-2 rounded-lg font-medium bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white transition-colors"
+                    >
+                      ← Previous
+                    </button>
+                    <div className="flex gap-1">
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                        <button
+                          key={p}
+                          onClick={() => goToPage(p)}
+                          className={`min-w-[2.5rem] px-3 py-2 rounded-lg font-medium transition-colors ${
+                            p === currentPage
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => goToPage(currentPage + 1)}
+                      disabled={currentPage >= totalPages}
+                      className="px-4 py-2 rounded-lg font-medium bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white transition-colors"
+                    >
+                      Next →
+                    </button>
+                  </nav>
+                )}
+              </>
             ) : (
               <div className="text-center py-12">
                 <svg
