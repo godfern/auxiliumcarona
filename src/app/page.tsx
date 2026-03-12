@@ -7,6 +7,8 @@ import EventsNewsSection from "./components/EventsNewsSection";
 import UpcomingEventsNewsSection from "./components/UpcomingEventsNewsSection";
 import { fetchEvents, fetchCarousels } from "@/lib/strapi";
 
+export const revalidate = 30;
+
 export default async function Home() {
   let events: Awaited<ReturnType<typeof fetchEvents>> = [];
   let carouselItems: Awaited<ReturnType<typeof fetchCarousels>> = [];

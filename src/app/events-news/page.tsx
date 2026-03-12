@@ -1,6 +1,8 @@
 import { fetchEvents } from '@/lib/strapi';
 import EventsNewsClient from './EventsNewsClient';
 
+export const revalidate = 30;
+
 export default async function EventsNewsPage() {
   let events: Awaited<ReturnType<typeof fetchEvents>> = [];
   try {
