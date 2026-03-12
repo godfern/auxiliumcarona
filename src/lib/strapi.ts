@@ -35,6 +35,7 @@ export interface EventNewsItem {
   title: string;
   date: string;
   description?: string;
+  /** Image URL, or empty string if no image available */
   thumbnail: string;
   slug: string;
   subTitle?: string;
@@ -167,14 +168,27 @@ function getMediaUrl(media: StrapiEventEntry['thumbnail'] | undefined): string {
   return '/images/school1.jpg';
 }
 
-/** Get thumbnail/main image from entry (images.imagesUrl1 or thumbnail or first gallery) */
+/** Get media URL or empty string if no valid media (for optional display) */
+function getMediaUrlOrEmpty(media: StrapiEventEntry['thumbnail'] | undefined): string {
+  if (!media) return '';
+  const v4 = media as StrapiMedia;
+  if (v4?.data?.attributes?.url) return imageUrl(v4.data.attributes.url);
+  const v5 = media as { url?: string };
+  if (typeof v5?.url === 'string') return imageUrl(v5.url);
+  return '';
+}
+
+/** Get best image for cards: eventMainImage, first gallery image, thumbnail. Empty string if none. */
 function getEntryImageUrl(entry: StrapiEventEntry, a: StrapiEventAttributes & Record<string, unknown>): string {
-  const images = (a.images ?? (entry as StrapiEventEntry).images) as { imagesUrl1?: string; imagesUrl2?: string } | undefined;
-  if (typeof images?.imagesUrl1 === 'string') return imageUrl(images.imagesUrl1);
-  const thumb = getMediaUrl(a.thumbnail ?? (entry as StrapiEventEntry).thumbnail);
-  if (thumb !== '/images/school1.jpg') return thumb;
+  const eventMain = getMediaUrlOrEmpty(a.eventMainImage ?? (entry as StrapiEventEntry).eventMainImage);
+  if (eventMain) return eventMain;
   const urls = getGalleryUrls(a.gallery ?? (entry as StrapiEventEntry).gallery);
-  return urls[0] ?? '/images/school1.jpg';
+  if (urls[0]) return urls[0];
+  const thumb = getMediaUrlOrEmpty(a.thumbnail ?? (entry as StrapiEventEntry).thumbnail);
+  if (thumb) return thumb;
+  const images = (a.images ?? (entry as StrapiEventEntry).images) as { imagesUrl1?: string } | undefined;
+  if (typeof images?.imagesUrl1 === 'string') return imageUrl(images.imagesUrl1);
+  return '';
 }
 
 function getGalleryUrls(
@@ -241,19 +255,12 @@ function mapStrapiEventToItem(entry: StrapiEventEntry): EventNewsItem {
 function mapStrapiEventToDetail(entry: StrapiEventEntry): EventNewsDetailItem {
   const item = mapStrapiEventToItem(entry);
   const a = getAttrs(entry);
-  const firstImage = getEntryImageUrl(entry, a);
-  const eventMainImageUrl = getMediaUrl(a.eventMainImage ?? entry.eventMainImage);
-  const eventMainImage =
-    eventMainImageUrl !== '/images/school1.jpg'
-      ? eventMainImageUrl
-      : firstImage !== '/images/school1.jpg'
-        ? firstImage
-        : item.thumbnail;
+  const eventMainImage = getEntryImageUrl(entry, a);
   return {
     ...item,
     subTitle: a.subTitle ?? undefined,
     longDescription: a.longDescription ?? undefined,
-    eventMainImage,
+    eventMainImage: eventMainImage || undefined,
     gallery: getGalleryUrls(a.gallery ?? entry.gallery),
   };
 }

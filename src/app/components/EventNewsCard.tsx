@@ -20,26 +20,33 @@ export default function EventNewsCard({ item }: EventNewsCardProps) {
         return type === 'event' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800';
     };
 
+    const hasImage = item.thumbnail && item.thumbnail.length > 0;
+
     return (
         <Link href={`/events-news/${item.slug}`} className="group">
             <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                {/* Thumbnail */}
-                <div className="relative h-48 overflow-hidden">
-                    <Image
-                        src={item.thumbnail}
-                        alt={item.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        unoptimized
-                    />
-                    {/* Type badge */}
-                    <div className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(item.type)}`}>
-                        {item.type === 'event' ? 'Event' : 'News'}
+                {hasImage && (
+                    <div className="relative h-48 overflow-hidden">
+                        <Image
+                            src={item.thumbnail}
+                            alt={item.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            unoptimized
+                        />
+                        <div className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(item.type)}`}>
+                            {item.type === 'event' ? 'Event' : 'News'}
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* Content */}
                 <div className="p-4">
+                    {!hasImage && (
+                        <div className={`inline-block mb-3 px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(item.type)}`}>
+                            {item.type === 'event' ? 'Event' : 'News'}
+                        </div>
+                    )}
                     <h3 className="font-semibold text-lg mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">
                         {item.title}
                     </h3>

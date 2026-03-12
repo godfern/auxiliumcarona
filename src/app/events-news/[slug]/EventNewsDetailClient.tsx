@@ -38,7 +38,10 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
     return type === 'event' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800';
   };
 
-  const gallery = item.gallery && item.gallery.length > 0 ? item.gallery : [item.eventMainImage || item.thumbnail];
+  const heroImage = item.eventMainImage || item.thumbnail;
+  const hasHeroImage = Boolean(heroImage);
+  const hasGallery = Boolean(item.gallery && item.gallery.length > 0);
+  const gallery = hasGallery ? item.gallery! : (hasHeroImage ? [heroImage!] : []);
 
   return (
     <div>
@@ -62,25 +65,29 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
 
         <section className="py-8">
           <div className="max-w-4xl mx-auto px-6">
-            <div className="mb-8">
-              <div className="relative h-[600px] rounded-lg overflow-hidden">
-                <Image
-                  src={item.eventMainImage || item.thumbnail}
-                  alt={item.title}
-                  fill
-                  className="object-cover cursor-pointer"
-                  onClick={() => setShowGallery(true)}
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
-                  <div className="bg-white bg-opacity-90 rounded-full p-3 opacity-0 hover:opacity-100 transition-opacity duration-300">
-                    <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </div>
+            {hasHeroImage && (
+              <div className="mb-8">
+                <div className="relative h-[600px] rounded-lg overflow-hidden">
+                  <Image
+                    src={heroImage}
+                    alt={item.title}
+                    fill
+                    className="object-cover cursor-pointer"
+                    onClick={() => gallery.length > 0 && setShowGallery(true)}
+                    unoptimized
+                  />
+                  {gallery.length > 0 && (
+                    <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+                      <div className="bg-white bg-opacity-90 rounded-full p-3 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
+            )}
 
             {item.description && (
               <div className="mb-8">
@@ -94,11 +101,11 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
               </div>
             )}
 
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="font-semibold text-xl mb-6">Photo Gallery</h3>
-              {item.gallery && item.gallery.length > 0 ? (
+            {hasGallery && (
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h3 className="font-semibold text-xl mb-6">Photo Gallery</h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {item.gallery.map((image, index) => (
+                  {item.gallery!.map((image, index) => (
                     <div
                       key={index}
                       className="relative h-32 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity group"
@@ -123,13 +130,8 @@ export default function EventNewsDetailClient({ item }: EventNewsDetailClientPro
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div className="py-12 text-center border-2 border-dashed border-gray-200 rounded-lg">
-                  <p className="text-gray-600 font-medium">Coming Soon</p>
-                  <p className="text-gray-500 text-sm mt-1">Photos will be added soon</p>
-                </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </section>
       </main>
